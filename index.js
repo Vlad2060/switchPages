@@ -1,32 +1,36 @@
-let prevButton = document.getElementById('prev').onclick = prevFun
-let nextButton = document.getElementById('next').onclick = nextFun
+let prevButton = document.getElementById('prev');
+let nextButton = document.getElementById('next');
+
+prevButton.addEventListener('click', prevFun);
+nextButton.addEventListener('click', nextFun);
 
 const cirlces = document.querySelectorAll('.cirlce')
 const lines = document.querySelectorAll('.line')
 
-let a = -1
+let length = 0;
 
 function nextFun() {
-    a++
-    check()
-    cirlces[a].style.borderColor = 'rgb(77, 77, 255)'
-    cirlces[a].style.color = 'rgb(77, 77, 255)'
-    lines[a].style.background = 'rgb(77, 77, 255)'
+    if(length >= 0) prevButton.classList.remove('disabled');
+    if(!(length >= cirlces.length)) length++;
+    addColors();
 }
 
 function prevFun() {
-    a--
-    check()
-    lines[a].style.background = 'rgb(171, 171, 171)'
-    cirlces[a].style.borderColor = 'rgb(171, 171, 171)'
-    cirlces[a].style.color = 'rgb(171, 171, 171)'
+    if(!(length <= 0)) length--;
+    if(length <= 0) prevButton.classList.add('disabled')
+    addColors();
 }
 
+function addColors() {
+    for(let i = 0; i < cirlces.length; i++) {
+        lines[i].style.background = 'rgb(171, 171, 171)'
+        cirlces[i].style.borderColor = 'rgb(171, 171, 171)'
+        cirlces[i].style.color = 'rgb(171, 171, 171)'
+    }
 
-function check() {
-    if (a > 4) {
-        a = 4
-    } else if (a < -1) {
-        a = -1
+    for(let i = 0; i < length; i++) {
+        cirlces[i].style.borderColor = 'rgb(77, 77, 255)'
+        cirlces[i].style.color = 'rgb(77, 77, 255)'
+        lines[i].style.background = 'rgb(77, 77, 255)'
     }
 }

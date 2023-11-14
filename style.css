@@ -46,3 +46,8 @@ button {
     height: 2px;
     background-color: rgb(171, 171, 171);
 }
+
+.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
